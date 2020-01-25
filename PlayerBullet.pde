@@ -5,6 +5,8 @@ abstract class PlayerBullet extends GameObject {
     this.objType = 1;
   }
   void update() {
+    collider.cliner.regist(this);
+    collider_size = size/2;
     position.x += cos(rad(ang)) * speed;
     position.y += sin(rad(ang)) * speed;
     speed += accele;
@@ -18,6 +20,12 @@ class PlayerBullet0 extends PlayerBullet {
     size = 13.0;
     collider_size = 25.0;
     this.image =image;
+  }
+  void render() {
+    imageMode(CENTER);
+    tint(200,150);
+    if(image != null)image(image,position.x,position.y,size,size);
+    
   }
   void run(){};
 }
@@ -33,7 +41,7 @@ class PlayerBullet1 extends PlayerBullet {
   }
   void render() {
     imageMode(CENTER);
-    tint(200,150);
+    tint(255,150);
     pushMatrix();
     translate(position.x,position.y);
     rotate(rad(ang+90));

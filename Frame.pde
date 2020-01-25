@@ -1,4 +1,5 @@
 class Frame {
+  float ang = 40,alpha = 0,frame = 40;
   void frame() {
     /*
     noStroke();
@@ -10,10 +11,22 @@ class Frame {
     rect(0,460,335,20);
     */
     image(frame_image,0,0,640,480);
-    image(logo,310,150,360,480);
     image(score_text,340,20,164,121);
     image(player_text,340,70,160,120);
     image(bomb_text,340,120,160,120);
+  }
+  
+  void logo() {
+    ang += (0-ang)/frame;
+    alpha += (255-alpha)/frame;
+    tint(255,alpha);
+    
+    pushMatrix();
+    translate(350,250);
+    rotate(rad(ang));
+    imageMode(CORNER);
+    image(logo,0,0,300,200);
+    popMatrix();
   }
   void score() {
     textFont(stateFont);
@@ -41,6 +54,7 @@ class Frame {
     imageMode(CORNER);
     noTint();
     frame();
+    logo();
     //image(window,15,320,340,150);
     score();
     life();

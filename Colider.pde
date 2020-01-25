@@ -34,7 +34,6 @@ class Collider {
       xor >>=2;
       shift++;
     }
-    //if(shift > 10)println(upper_left,lower_right,upper_left_pos.x,upper_left_pos.y,lower_right_pos.x,lower_right_pos.y);
     int re = lower_right >> shift * 2;
     
     return re;
@@ -185,6 +184,5 @@ class Collider {
          }
        }
     }
-      
   }
 }

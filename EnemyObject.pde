@@ -23,7 +23,6 @@ abstract class EnemyObject extends GameObject{
     speed += accele;
   }
   void targetMove() {
-    println(cos(rad(aim(position,target))) * max,max);
     float targetSpeed,defaultSpeed,speed;
     targetSpeed = (target.x-position.x) / frame;
     defaultSpeed = cos(rad(aim(position,target))) * max;
@@ -59,12 +58,15 @@ abstract class Stage extends EnemyObject {
   Stage() {
     this.objType = 2;
     collider_size = 0;
+    speed =0;
   }
   abstract class Enemy extends EnemyObject{
     int hp;
     float defeatScore = 1000;
     float shotScore = 100;
     Enemy(Position position,int hp) {
+      collider.cliner.regist(this);
+      collider_size = size/2;
       this.objType = 3;
       this.collider_size = size/3;
       this.position = position;
@@ -81,6 +83,7 @@ abstract class Stage extends EnemyObject {
       }
       if(hp < 0) {
         pl.score += defeatScore;
+        addData.add(new Explosion(position.getPosition(),100.0,10.0,image));
         return true;
       }
       return false;
@@ -89,6 +92,8 @@ abstract class Stage extends EnemyObject {
       EnemyBullet() {      
         this.objType = 4;
         this.collider_size = size/3;
+        collider.cliner.regist(this);
+        collider_size = size/2;
         position.x = Enemy.this.position.x;
         position.y = Enemy.this.position.y;
       }

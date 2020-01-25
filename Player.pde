@@ -1,17 +1,20 @@
 //Input
 int bit;
 int shift = 0;
+boolean control = false;
 boolean shot = false;
 abstract class Player extends GameObject{
   int hp=2,bomb=3,score=0;
   boolean deadFlag = false;
   boolean controlFlag = true;
   Player (Position position,float size,float speed) {
+    collider.cliner.regist(this);
+    collider_size = size/2;
     this.position = position;
     this.size = size;
     this.speed = speed;
     this.objType = 0;
-    this.collider_size = size/3;
+    this.collider_size = size/7;
     collider.cliner.regist(this);
   }
   //座標の更新　及び表示
@@ -35,10 +38,10 @@ abstract class Player extends GameObject{
         if ((bit&(1<<2))>0) position.y-=sp;
         if ((bit&(1<<3))>0) position.y+=sp;
       }
-      position.x=max(position.x,0);
+      position.x=max(position.x,25);
       position.x=min(position.x,WIDTH);
-      position.y=max(position.y,0);
-      position.y=min(position.y,HEIGHT);
+      position.y=max(position.y,20);
+      position.y=min(position.y,HEIGHT-20);
   }
   void render() {
     /*
@@ -87,7 +90,7 @@ class Player0 extends Player {
       }
     }
       
-    if(time % 4 == 0 && shot && !deadFlag) {
+    if(time % 4 == 0 && shot && !deadFlag && !kaiwa) {
       Position pos;
       pos = new Position(position.x + 10,position.y-10);
       addData.add(new PlayerBullet0(pos,BulletImage.get("bullet2-12")));
@@ -122,7 +125,11 @@ void keyPressed() {
     if (keyCode == UP)    bit |= (1<<2); //00000100
     if (keyCode == DOWN)  bit |= (1<<3); //00001000
     if (keyCode == SHIFT) shift = 1;
-    if (keyCode == 'Z') shot = true;
+    if (keyCode == 'Z')  {
+      shot = true;
+      if(com != null) com.num++;
+    }
+    if (keyCode == CONTROL) control = true;
   }
 void keyReleased() {
     if (keyCode == RIGHT) bit &= ~(1<<0);
@@ -131,4 +138,5 @@ void keyReleased() {
     if (keyCode == DOWN)  bit &= ~(1<<3);
     if (keyCode == SHIFT) shift = 0;
     if (keyCode == 'Z') shot = false;
+    if (keyCode == CONTROL) control = false;
 }
