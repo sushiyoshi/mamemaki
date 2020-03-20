@@ -1,6 +1,6 @@
 # 全日本豆まき選手権
 
-![Logo](https://drive.google.com/file/d/1yWi5yBZIkC7ljB3BpUIGqwC2vdcKWKIv/view?usp=sharing)
+![Logo](https://drive.google.com/file/d/1yWi5yBZIkC7ljB3BpUIGqwC2vdcKWKIv/view?usp=sharing "LOGO")
 
 
 ## ゲームの概要
